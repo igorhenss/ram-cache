@@ -3,11 +3,11 @@ package entity;
 import java.util.Random;
 
 public class Cell {
-    private Integer id;
+    private Integer tag;
     private String value;
 
-    public Cell(Integer id) {
-        this.id = id;
+    public Cell(Integer tag) {
+        this.tag = tag;
         this.value = generateRandomValue();
     }
 
@@ -28,8 +28,16 @@ public class Cell {
         return (char) (random.nextInt(26) + 'A');
     }
 
-    public Integer getId() {
-        return id;
+    public boolean tagFound(Integer tagToFind) {
+        return tag.equals(tagToFind);
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Integer getTag() {
+        return tag;
     }
 
     public String getValue() {
@@ -38,6 +46,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "| " + String.format("%04d", getId()) + " | " + getValue() + " |";
+        return "| " + String.format("%04d", getTag()) + " | " + getValue() + " |";
     }
 }
