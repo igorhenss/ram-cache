@@ -11,6 +11,14 @@ public class RAM {
         fillCells(blockSize);
     }
 
+    public boolean contains(List<Cell> cells) {
+        return cells.stream().anyMatch(this::contains);
+    }
+
+    private boolean contains(Cell cell) {
+        return cells.contains(cell);
+    }
+
     private void fillCells(Integer blockSize) {
         for (int i = 0; i < 1024 * blockSize; i++) {
             cells.add(generateCell(i));

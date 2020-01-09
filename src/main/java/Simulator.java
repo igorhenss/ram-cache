@@ -48,15 +48,20 @@ public class Simulator {
         ramCells.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Integer selectedRow = ramCells.getSelectedRow();
-//                List<Integer> indexes = indexesToGet(selectedRow);
-                Integer amountOfRows = cache.getRows().size();
-                if (amountOfRows < cache.getSize()) {
-                    Row row = new Row(BLOCK_SIZE);
-                    List<Cell> cells = getCells(selectedRow);
-                    row.setCells(cells);
-                    cache.addRow(row);
-                    cacheModel.addRow(convertToVector(amountOfRows, row));
+                var selectedRow = ramCells.getSelectedRow();
+                var selectedCells = getCells(selectedRow);
+                var maxAmountOfRows = cache.getMaxAmountOfRows();
+                var amountOfRows = cache.getAmountOfRows();
+                if (cache.contains(selectedCells)) {
+                    hitEvent();
+                } else {
+                    if (amountOfRows < maxAmountOfRows) {
+                        missEvent();
+                        var row = new Row(BLOCK_SIZE);
+                        row.setCells(selectedCells);
+                        cache.addRow(row);
+                        cacheModel.addRow(convertToVector(amountOfRows, row));
+                    }
                 }
             }
         });
@@ -65,10 +70,10 @@ public class Simulator {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (clickEvent(e)) {
-                    logger.append(getTime() + "\n");
-                    logger.append("Turned on: FIFO.\n");
+                    log(getTime());
+                    log("Turned on: FIFO.");
                     unclick(applyLRU, applyLRU.getText());
-                    logger.append("\n");
+                    logLineBreak();
                 }
             }
         });
@@ -77,10 +82,10 @@ public class Simulator {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (clickEvent(e)) {
-                    logger.append(getTime() + "\n");
-                    logger.append("Turned on: LFU.\n");
+                    log(getTime());
+                    log("Turned on: LFU.");
                     unclick(applyLRU, applyLRU.getText());
-                    logger.append("\n");
+                    logLineBreak();
                 }
             }
         });
@@ -89,35 +94,50 @@ public class Simulator {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (clickEvent(e)) {
-                    logger.append(getTime() + "\n");
-                    logger.append("Turned on: LRU.\n");
+                    log(getTime());
+                    log("Turned on: LRU.");
                     unclick(applyFIFO, applyFIFO.getText());
                     unclick(applyLFU, applyLFU.getText());
-                    logger.append("\n");
+                    logLineBreak();
                 }
             }
         });
     }
 
-//    private List<Integer> indexesToGet(Integer index) {
-//        List<Integer> indexes = new ArrayList<>();
-//        Integer resto = index % BLOCK_SIZE;
-//        if (resto == 0) {
-//
-//        }
-//    }
+    private void hitEvent() {
+        log(getTime());
+        log("HIT");
+        logLineBreak();
+    }
+
+    private void missEvent() {
+        log(getTime());
+        log("MISS");
+        logLineBreak();
+    }
+
+    private void log(String message) {
+        logger.append(message);
+        logLineBreak();
+    }
+
+    private void logLineBreak() {
+        logger.append("\n");
+    }
 
     private List<Cell> getCells(Integer desiredRow) {
-        List<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < BLOCK_SIZE; i++) {
-            cells.add(ram.getCells().get(desiredRow + i));
+        var cells = new ArrayList<Cell>();
+        var mod = desiredRow % BLOCK_SIZE;
+        var start = desiredRow - mod;
+        for (int i = start; i < start + BLOCK_SIZE; i++) {
+            cells.add(ram.getCells().get(i));
         }
         return cells;
     }
 
     private Vector convertToVector(Integer tag, Row row) {
-        List<Cell> cells = row.getCells();
-        Vector vector = new Vector();
+        var cells = row.getCells();
+        var vector = new Vector();
         vector.add(tag);
         cells.forEach(cell -> vector.add(cell.getValue()));
         return vector;
@@ -193,14 +213,14 @@ public class Simulator {
     private void unclick(JRadioButton button, String name) {
         if (button.isSelected()) {
             button.setSelected(false);
-            logger.append("Turned off: " + name + ".\n");
+            log("Turned off: " + name + ".");
         }
     }
 
     private void click(JRadioButton button, String name) {
         if (!button.isSelected()) {
             button.setSelected(true);
-            logger.append("Turned on: " + name + ".\n");
+            log("Turned on: " + name + ".");
         }
     }
 
