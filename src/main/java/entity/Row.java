@@ -27,11 +27,11 @@ public class Row {
 
     public Cell read(Integer tagToRead) {
         Optional<Cell> foundCell = cells.stream().filter(cell -> cell.tagFound(tagToRead)).findAny();
-        if (foundCell.isPresent()) {
-            frequency++;
-            return foundCell.get();
+        if (foundCell.isEmpty()) {
+            throw new IllegalArgumentException("Tag not found.");
         }
-        throw new IllegalArgumentException("Tag not found.");
+        frequency++;
+        return foundCell.get();
     }
 
     public void write(Integer tagToWriteOn, String newValue) {
@@ -39,7 +39,6 @@ public class Row {
             if (cell.tagFound(tagToWriteOn)) {
                 cell.setValue(newValue);
                 frequency++;
-                return;
             }
         });
     }

@@ -7,10 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,8 +19,8 @@ public class Simulator {
 
     private JPanel simulator;
 
-    private DefaultTableModel cacheModel  = createTableModel();
-    private DefaultTableModel ramModel  = createTableModel();
+    private DefaultTableModel cacheModel  = createCacheModel();
+    private DefaultTableModel ramModel  = createRamModel();
     private JScrollPane cacheScrollPane;
     private JScrollPane loggerScrollPane;
     private JScrollPane ramScrollPane;
@@ -45,22 +42,58 @@ public class Simulator {
         setCacheRows();
         initializeCache();
 
+        cacheCells.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                var selectedRow = cacheCells.getSelectedRow();
+                var selectedColumn = cacheCells.getSelectedColumn();
+                var row = cache.getRows().get(selectedRow);
+                var cell = row.getCells().get(selectedColumn - 1);
+
+                var result = cacheCells.getValueAt(selectedRow, selectedColumn).toString();
+                cell.setValue(result);
+            }
+        });
+
+        cacheCells.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                var selectedRow = cacheCells.getSelectedRow();
+                var selectedColumn = cacheCells.getSelectedColumn();
+                var row = cache.getRows().get(selectedRow);
+                var cell = row.getCells().get(selectedColumn - 1);
+            }
+        });
+
         ramCells.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 var selectedRow = ramCells.getSelectedRow();
-                var selectedCells = getCells(selectedRow);
+                var selectedCells = getRamCells(selectedRow);
                 var maxAmountOfRows = cache.getMaxAmountOfRows();
                 var amountOfRows = cache.getAmountOfRows();
+
                 if (cache.contains(selectedCells)) {
                     hitEvent();
                 } else {
+                    var row = new Row(BLOCK_SIZE);
+                    row.setCells(selectedCells);
                     if (amountOfRows < maxAmountOfRows) {
                         missEvent();
-                        var row = new Row(BLOCK_SIZE);
-                        row.setCells(selectedCells);
                         cache.addRow(row);
                         cacheModel.addRow(convertToVector(amountOfRows, row));
+                    } else {
+                        // REPLACEMENT
+                        if (applyLFU.isSelected()) {
+                            var lfuRow = cache.lfuRow();
+                            if (applyFIFO.isSelected()) {
+                                if (hasMultipleLfu(lfuRow, cache.getRows())) {
+                                    var lfuRows = cache.getRowsWithFrequency(lfuRow.getFrequency());
+                                    var fifoLfuRow = cache.getFifoRow(lfuRows);
+                                    replaceOnRam(fifoLfuRow);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -104,6 +137,27 @@ public class Simulator {
         });
     }
 
+    private void replaceOnRam(Row rowToReplace) {
+        var cellsToReplace = rowToReplace.getCells();
+        cellsToReplace.forEach(cell -> {
+            var ramCell = getCellByTag(cell.getTag());
+            ramCell.setValue(cell.getValue());
+        });
+    }
+
+    private Cell getCellByTag(int tag) {
+        var cells = ram.getCells();
+        return cells.stream()
+                .filter(cell -> cell.getTag().equals(tag))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Cell not found."));
+    }
+
+    private boolean hasMultipleLfu(Row lfuRow, List<Row> rows) {
+        return rows.stream()
+                .anyMatch(row -> row.getFrequency().equals(lfuRow.getFrequency()) && !row.equals(lfuRow));
+    }
+
     private void hitEvent() {
         log(getTime());
         log("HIT");
@@ -125,7 +179,7 @@ public class Simulator {
         logger.append("\n");
     }
 
-    private List<Cell> getCells(Integer desiredRow) {
+    private List<Cell> getRamCells(Integer desiredRow) {
         var cells = new ArrayList<Cell>();
         var mod = desiredRow % BLOCK_SIZE;
         var start = desiredRow - mod;
@@ -173,6 +227,7 @@ public class Simulator {
 
     private void setRamRows() {
         Vector<String> headers = new Vector<>();
+
         headers.add("Tag");
         headers.add("Value");
 
@@ -240,7 +295,7 @@ public class Simulator {
         }
     }
 
-    private DefaultTableModel createTableModel() {
+    private DefaultTableModel createRamModel() {
         return new DefaultTableModel(0, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -248,4 +303,14 @@ public class Simulator {
             }
         };
     }
+
+    private DefaultTableModel createCacheModel() {
+        return new DefaultTableModel(0, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return true;
+            }
+        };
+    }
+
 }
