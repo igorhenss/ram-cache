@@ -31,6 +31,8 @@ public class Simulator {
     private JTable cacheCells;
     private JTable ramCells;
     private JTextArea logger;
+    private JTextArea hitCounter;
+    private JTextArea missCounter;
 
     private RAM ram = new RAM(BLOCK_SIZE);
     private Cache cache;
@@ -41,6 +43,9 @@ public class Simulator {
         setRamRows();
         setCacheRows();
         initializeCache();
+
+        hitText();
+        missText();
 
         cacheCells.addFocusListener(new FocusAdapter() {
             @Override
@@ -161,13 +166,25 @@ public class Simulator {
     private void hitEvent() {
         log(getTime());
         log("HIT");
+        cache.hit();
+        hitText();
         logLineBreak();
     }
 
     private void missEvent() {
         log(getTime());
         log("MISS");
+        cache.miss();
+        missText();
         logLineBreak();
+    }
+
+    private void hitText() {
+        hitCounter.setText("HIT: " + cache.getHitCounter());
+    }
+
+    private void missText() {
+        missCounter.setText("MISS: " + cache.getMissCounter());
     }
 
     private void log(String message) {

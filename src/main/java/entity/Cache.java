@@ -7,11 +7,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Cache {
+    private Integer hitCounter = 0;
+    private Integer missCounter = 0;
     private List<Row> rows = new ArrayList<>();
     private Integer size;
 
     public Cache(Integer size) {
         this.size = size;
+    }
+
+    public void hit() {
+        hitCounter++;
+    }
+
+    public void miss() {
+        missCounter++;
     }
 
     public boolean contains(List<Cell> cells) {
@@ -65,6 +75,14 @@ public class Cache {
 
     public Integer getMaxAmountOfRows() {
         return size;
+    }
+
+    public Integer getHitCounter() {
+        return hitCounter;
+    }
+
+    public Integer getMissCounter() {
+        return missCounter;
     }
 
     public void setSize(Integer size) {

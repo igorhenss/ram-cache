@@ -2,18 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3dcdc7a9-f2e2-4457-bd94-4617db7e6c13" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/RAMCacheSimulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RAMCacheSimulator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAMCacheSimulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RAMCacheSimulator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Cache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/RAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/RAM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Row.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/entity/Cache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Cache.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entity/Row.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Row.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/i18n/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/i18n/messages.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +63,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="179" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="264" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="228" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -71,7 +87,7 @@
       </method>
     </configuration>
     <configuration name="Simulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="13" />
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Simulator" />
       <module name="RAMCacheSimulator" />
@@ -79,6 +95,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Application.Simulator" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Simulator" />
@@ -120,38 +140,52 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="400" y="43" key="#Simulator/0.0.1366.768@0.0.1366.768" timestamp="1578343426418" />
-    <state x="779" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1578600473483">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="174" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579296783241">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="174" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1299.741@67.27.1299.741" timestamp="1579296783241" />
+    <state x="808" y="97" width="374" height="592" key="#com.intellij.ide.util.MemberChooser" timestamp="1579298777032">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="779" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1578600473483" />
+    <state x="808" y="97" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/67.27.1299.741@67.27.1299.741" timestamp="1579298777032" />
     <state x="322" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1578599361542">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="322" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.768@0.0.1366.768" timestamp="1578599361542" />
-    <state width="1323" height="140" key="GridCell.Tab.0.bottom" timestamp="1578601515083">
+    <state x="463" y="140" key="FileChooserDialogImpl" timestamp="1579285458450">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="140" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1578601515083" />
-    <state width="1323" height="140" key="GridCell.Tab.0.center" timestamp="1578601515083">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="463" y="140" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1579285458450" />
+    <state width="1253" height="101" key="GridCell.Tab.0.bottom" timestamp="1579298969465">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1323" height="140" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1578601515083" />
-    <state width="1323" height="140" key="GridCell.Tab.0.left" timestamp="1578601515083">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1323" height="140" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
+    <state width="1253" height="101" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1579298969465" />
+    <state width="1253" height="101" key="GridCell.Tab.0.center" timestamp="1579298969464">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1323" height="140" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1578601515083" />
-    <state width="1323" height="140" key="GridCell.Tab.0.right" timestamp="1578601515083">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1323" height="140" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
+    <state width="1253" height="101" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1579298969464" />
+    <state width="1253" height="101" key="GridCell.Tab.0.left" timestamp="1579298969464">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1323" height="140" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1578601515083" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1578592954617">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state width="1323" height="140" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
+    <state width="1253" height="101" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1579298969464" />
+    <state width="1253" height="101" key="GridCell.Tab.0.right" timestamp="1579298969465">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state width="1323" height="140" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
+    <state width="1253" height="101" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1579298969465" />
+    <state x="222" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1579296770511">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1578592954617" />
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1578592827700">
+    <state x="222" y="27" width="1024" height="741" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1579296770511" />
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1578747788322">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1578592827700" />
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1578747788322" />
     <state x="379" y="116" width="607" height="536" key="find.popup" timestamp="1578594566034">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -166,7 +200,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Simulator.java</url>
-          <line>141</line>
+          <line>146</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
