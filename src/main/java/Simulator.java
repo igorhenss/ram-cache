@@ -40,8 +40,8 @@ public class Simulator {
     public Simulator() {
         removeFocus();
 
-        setRamRows();
-        setCacheRows();
+        startRamRows();
+        startCacheRows();
         initializeCache();
 
         hitText();
@@ -49,7 +49,7 @@ public class Simulator {
 
         cacheCells.addFocusListener(new FocusAdapter() {
             @Override
-            public void focusLost(FocusEvent e) {
+            public void focusGained(FocusEvent e) {
                 var selectedRow = cacheCells.getSelectedRow();
                 var selectedColumn = cacheCells.getSelectedColumn();
                 var row = cache.getRows().get(selectedRow);
@@ -57,46 +57,52 @@ public class Simulator {
 
                 var result = cacheCells.getValueAt(selectedRow, selectedColumn).toString();
                 cell.setValue(result);
-            }
-        });
 
-        cacheCells.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                var selectedRow = cacheCells.getSelectedRow();
-                var selectedColumn = cacheCells.getSelectedColumn();
-                var row = cache.getRows().get(selectedRow);
-                var cell = row.getCells().get(selectedColumn - 1);
+                hitEvent(selectedRow);
+                cache.hitRow(getCacheRow(selectedRow));
             }
         });
 
         ramCells.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                var selectedRow = ramCells.getSelectedRow();
-                var selectedCells = getRamCells(selectedRow);
-                var maxAmountOfRows = cache.getMaxAmountOfRows();
-                var amountOfRows = cache.getAmountOfRows();
-
-                if (cache.contains(selectedCells)) {
-                    hitEvent();
+                if (!applyLRU.isSelected() && !applyLFU.isSelected() && !applyFIFO.isSelected()) {
+                    noReplacementPoliciesEvent();
                 } else {
+                    var selectedRow = ramCells.getSelectedRow();
+                    var selectedCells = getRamCells(selectedRow);
+                    var maxAmountOfRows = cache.getMaxAmountOfRows();
+                    var amountOfRows = cache.getAmountOfRows();
                     var row = new Row(BLOCK_SIZE);
-                    row.setCells(selectedCells);
-                    if (amountOfRows < maxAmountOfRows) {
-                        missEvent();
-                        cache.addRow(row);
-                        cacheModel.addRow(convertToVector(amountOfRows, row));
+
+                    if (cache.contains(selectedCells)) {
+                        hitEvent(selectedRow);
+                        cache.hitRow(selectedCells);
                     } else {
-                        // REPLACEMENT
-                        if (applyLFU.isSelected()) {
-                            var lfuRow = cache.lfuRow();
-                            if (applyFIFO.isSelected()) {
-                                if (hasMultipleLfu(lfuRow, cache.getRows())) {
-                                    var lfuRows = cache.getRowsWithFrequency(lfuRow.getFrequency());
-                                    var fifoLfuRow = cache.getFifoRow(lfuRows);
-                                    replaceOnRam(fifoLfuRow);
+                        row.setCells(selectedCells);
+                        missEvent(selectedRow);
+                        if (amountOfRows < maxAmountOfRows) {
+                            cache.addRow(amountOfRows, row);
+                            cacheModel.addRow(convertToVector(amountOfRows, row));
+                        } else {
+                            if (applyLFU.isSelected()) {
+                                var rowToReplace = cache.lfuRow();
+                                var lfuRows = cache.getRowsWithFrequency(rowToReplace.getFrequency());
+                                if (applyFIFO.isSelected()) {
+                                    if (hasMultipleLfu(lfuRows)) {
+                                        rowToReplace = cache.fifoRow(lfuRows);
+                                    }
                                 }
+                                replaceOnRam(rowToReplace);
+                                replaceOnCache(row, rowToReplace, selectedRow);
+                            } else if (applyLRU.isSelected()) {
+                                var rowToReplace = cache.lruRow();
+                                replaceOnRam(rowToReplace);
+                                replaceOnCache(row, rowToReplace, selectedRow);
+                            } else if (applyFIFO.isSelected()) {
+                                var rowToReplace = cache.fifoRow();
+                                replaceOnRam(rowToReplace);
+                                replaceOnCache(row, rowToReplace, selectedRow);
                             }
                         }
                     }
@@ -104,40 +110,31 @@ public class Simulator {
             }
         });
 
-        applyFIFO.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (clickEvent(e)) {
-                    log(getTime());
-                    log("Turned on: FIFO.");
-                    unclick(applyLRU, applyLRU.getText());
-                    logLineBreak();
-                }
+        applyFIFO.addItemListener(e -> {
+            if (clickEvent(e)) {
+                log(getTime());
+                log("Turned on: FIFO.");
+                unclick(applyLRU, applyLRU.getText());
+                logLineBreak();
             }
         });
 
-        applyLFU.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (clickEvent(e)) {
-                    log(getTime());
-                    log("Turned on: LFU.");
-                    unclick(applyLRU, applyLRU.getText());
-                    logLineBreak();
-                }
+        applyLFU.addItemListener(e -> {
+            if (clickEvent(e)) {
+                log(getTime());
+                log("Turned on: LFU.");
+                unclick(applyLRU, applyLRU.getText());
+                logLineBreak();
             }
         });
 
-        applyLRU.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (clickEvent(e)) {
-                    log(getTime());
-                    log("Turned on: LRU.");
-                    unclick(applyFIFO, applyFIFO.getText());
-                    unclick(applyLFU, applyLFU.getText());
-                    logLineBreak();
-                }
+        applyLRU.addItemListener(e -> {
+            if (clickEvent(e)) {
+                log(getTime());
+                log("Turned on: LRU.");
+                unclick(applyFIFO, applyFIFO.getText());
+                unclick(applyLFU, applyLFU.getText());
+                logLineBreak();
             }
         });
     }
@@ -148,6 +145,13 @@ public class Simulator {
             var ramCell = getCellByTag(cell.getTag());
             ramCell.setValue(cell.getValue());
         });
+        resetRamRows();
+    }
+
+    private void replaceOnCache(Row rowToReplace, Row rowToBeReplaced, Integer ramRowTag) {
+        cache.setRow(rowToReplace, rowToBeReplaced);
+        replacementEvent(ramRowTag, rowToBeReplaced);
+        resetCacheRows();
     }
 
     private Cell getCellByTag(int tag) {
@@ -158,24 +162,38 @@ public class Simulator {
                 .orElseThrow(() -> new RuntimeException("Cell not found."));
     }
 
-    private boolean hasMultipleLfu(Row lfuRow, List<Row> rows) {
-        return rows.stream()
-                .anyMatch(row -> row.getFrequency().equals(lfuRow.getFrequency()) && !row.equals(lfuRow));
+    private boolean hasMultipleLfu(List<Row> lfuRows) {
+        return lfuRows.size() > 1;
     }
 
-    private void hitEvent() {
+    private void noReplacementPoliciesEvent() {
         log(getTime());
-        log("HIT");
-        cache.hit();
-        hitText();
+        log("Nenhuma política de substituição selecionada.");
         logLineBreak();
     }
 
-    private void missEvent() {
+    private void hitEvent(Integer tag) {
         log(getTime());
-        log("MISS");
+        log("HIT on tag [" + tag + "]");
+        cache.hit();
+        hitText();
+        resetRamRows();
+        logLineBreak();
+    }
+
+    private void missEvent(Integer tag) {
+        log(getTime());
+        log("MISS on tag [" + tag + "]");
         cache.miss();
         missText();
+        resetRamRows();
+        logLineBreak();
+    }
+
+    private void replacementEvent(Integer ramRow, Row row) {
+        log(getTime());
+        log("RAM - Row [" + ramRow + "] selected.");
+        log("Cache - Row [" + row.getTagOnCache() + "] replaced.");
         logLineBreak();
     }
 
@@ -204,6 +222,10 @@ public class Simulator {
             cells.add(ram.getCells().get(i));
         }
         return cells;
+    }
+
+    private Row getCacheRow(Integer desiredRow) {
+        return cache.getRows().get(desiredRow);
     }
 
     private Vector convertToVector(Integer tag, Row row) {
@@ -242,7 +264,7 @@ public class Simulator {
         ramCells.setFocusable(false);
     }
 
-    private void setRamRows() {
+    private void startRamRows() {
         Vector<String> headers = new Vector<>();
 
         headers.add("Tag");
@@ -253,11 +275,33 @@ public class Simulator {
         ramCells.setModel(ramModel);
         defineColumnProperties(ramCells);
 
+        resetRamRows();
+    }
+
+    private void resetRamRows() {
+        ramModel.setRowCount(0);
+        setRamRows();
+    }
+
+    private void resetCacheRows() {
+        cacheModel.setRowCount(0);
+        setCacheRows();
+    }
+
+    private void setRamRows() {
         ram.getCells().forEach(cell ->
                 ramModel.addRow(new Object[]{ cell.getTag(), cell.getValue() }));
     }
 
     private void setCacheRows() {
+        var counter = 0;
+        for (Row row : cache.getRows()) {
+            cacheModel.addRow(convertToVector(counter, row));
+            counter++;
+        }
+    }
+
+    private void startCacheRows() {
         Vector<String> headers = new Vector<>();
         headers.add("Tag");
         for (int i = 0; i < BLOCK_SIZE; i++) {

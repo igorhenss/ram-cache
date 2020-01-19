@@ -25,13 +25,34 @@ public class Cache {
     }
 
     public boolean contains(List<Cell> cells) {
-        var cacheCells = new ArrayList<Cell>();
-        rows.forEach(row -> cacheCells.addAll(row.getCells()));
+        var cacheCells = getCacheCells();
         return cells.stream().anyMatch(cell -> contains(cacheCells, cell));
     }
 
     private boolean contains(List<Cell> cells, Cell cell) {
-        return cells.contains(cell);
+        return cells.stream().anyMatch(cacheCell -> cacheCell.getTag().equals(cell.getTag()));
+    }
+
+    public void hitRow(List<Cell> cells) {
+        var rowToHit = findRowFrom(cells);
+        rowToHit.hit();
+    }
+
+    public void hitRow(Row row) {
+        row.hit();
+    }
+
+    public Row findRowFrom(List<Cell> cells) {
+        return rows.stream()
+                .filter(row -> row.contains(cells.get(0)))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Row not found."));
+    }
+
+    private List<Cell> getCacheCells() {
+        var cells = new ArrayList<Cell>();
+        rows.forEach(row -> cells.addAll(row.getCells()));
+        return cells;
     }
 
     public int getAmountOfRows() {
@@ -39,10 +60,41 @@ public class Cache {
     }
 
     public Row lfuRow() {
-        var sortedRows = rows;
-        var comparator = lfuComparator();
-        sortedRows.sort(comparator);
-        return sortedRows.get(0);
+        var lfuRow = rows.get(0);
+        for (Row cacheRow : rows) {
+            if (cacheRow.getFrequency() < lfuRow.getFrequency()) {
+                lfuRow = cacheRow;
+            }
+        }
+        return lfuRow;
+    }
+
+    public Row fifoRow() {
+        return getFifoRow(rows);
+    }
+
+    public Row fifoRow(List<Row> rows) {
+        return getFifoRow(rows);
+    }
+
+    private Row getFifoRow(List<Row> rows) {
+        var fifoRow = rows.get(0);
+        for (Row cacheRow : rows) {
+            if (cacheRow.getAddedTime().isBefore(fifoRow.getAddedTime())) {
+                fifoRow = cacheRow;
+            }
+        }
+        return fifoRow;
+    }
+
+    public Row lruRow() {
+        var lruRow = rows.get(0);
+        for (Row cacheRow : rows) {
+            if (cacheRow.getLastUseTime().isBefore(lruRow.getLastUseTime())) {
+                lruRow = cacheRow;
+            }
+        }
+        return lruRow;
     }
 
     public List<Row> getRowsWithFrequency(int frequency) {
@@ -51,26 +103,13 @@ public class Cache {
                 .collect(Collectors.toList());
     }
 
-    public Row getFifoRow(List<Row> rows) {
-        var comparator = fifoComparator();
-        rows.sort(comparator);
-        return rows.get(0);
-    }
-
-    private Comparator<Row> lfuComparator() {
-        return Comparator.comparing(Row::getFrequency);
-    }
-
-    private Comparator<Row> fifoComparator() {
-        return Comparator.comparing(Row::getAddedTime);
-    }
-
     public List<Row> getRows() {
         return Collections.unmodifiableList(rows);
     }
 
-    public void addRow(Row row) {
-        rows.add(row);
+    public void addRow(Integer tag, Row row) {
+        var rowToAdd = new Row(tag, row);
+        rows.add(rowToAdd);
     }
 
     public Integer getMaxAmountOfRows() {
@@ -88,4 +127,10 @@ public class Cache {
     public void setSize(Integer size) {
         this.size = size;
     }
+
+    public void setRow(Row row, Row target) {
+        var targetIndex = rows.indexOf(target);
+        rows.get(targetIndex).setRow(row);
+    }
+
 }
