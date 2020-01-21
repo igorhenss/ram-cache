@@ -7,24 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dcdc7a9-f2e2-4457-bd94-4617db7e6c13" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/RAMCacheSimulator_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Cache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Row.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RAMCacheSimulator_jar/RAMCacheSimulator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/RAMCacheSimulator_jar/RAMCacheSimulator.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entity/Cache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Cache.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entity/Row.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Row.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,29 +145,29 @@
     <state x="463" y="140" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1579285458450" />
     <state x="463" y="162" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1579399596502" />
     <state x="507" y="162" width="424" height="513" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1579377084278" />
-    <state width="1320" height="194" key="GridCell.Tab.0.bottom" timestamp="1579381127208">
+    <state width="1320" height="194" key="GridCell.Tab.0.bottom" timestamp="1579545227584">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1323" height="140" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
-    <state width="1320" height="194" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1579381127208" />
+    <state width="1320" height="194" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1579545227584" />
     <state width="1253" height="194" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1579377076068" />
-    <state width="1320" height="194" key="GridCell.Tab.0.center" timestamp="1579381127208">
+    <state width="1320" height="194" key="GridCell.Tab.0.center" timestamp="1579545227582">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1323" height="140" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
-    <state width="1320" height="194" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1579381127208" />
+    <state width="1320" height="194" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1579545227582" />
     <state width="1253" height="194" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1579377076066" />
-    <state width="1320" height="194" key="GridCell.Tab.0.left" timestamp="1579381127206">
+    <state width="1320" height="194" key="GridCell.Tab.0.left" timestamp="1579545227581">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1323" height="140" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
-    <state width="1320" height="194" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1579381127206" />
+    <state width="1320" height="194" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1579545227581" />
     <state width="1253" height="194" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1579377076065" />
-    <state width="1320" height="194" key="GridCell.Tab.0.right" timestamp="1579381127208">
+    <state width="1320" height="194" key="GridCell.Tab.0.right" timestamp="1579545227583">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1323" height="140" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1579285463184" />
-    <state width="1320" height="194" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1579381127208" />
+    <state width="1320" height="194" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1579545227583" />
     <state width="1253" height="194" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1579377076067" />
     <state x="163" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1579378509390">
       <screen x="0" y="27" width="1366" height="741" />
@@ -189,11 +175,11 @@
     <state x="163" y="0" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1578592954617" />
     <state x="163" y="27" width="1024" height="741" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1579378509390" />
     <state x="222" y="27" width="1024" height="741" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1579296770511" />
-    <state x="379" y="229" key="com.intellij.ide.util.TipDialog" timestamp="1579398755707">
+    <state x="379" y="229" key="com.intellij.ide.util.TipDialog" timestamp="1579547886097">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1578747788322" />
-    <state x="379" y="229" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1579398755707" />
+    <state x="379" y="229" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1579547886097" />
     <state x="427" y="229" key="com.intellij.ide.util.TipDialog/67.27.1299.741@67.27.1299.741" timestamp="1579362132124" />
     <state x="427" y="139" width="710" height="538" key="find.popup" timestamp="1579376928864">
       <screen x="67" y="27" width="1299" height="741" />

@@ -71,8 +71,8 @@
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="200"/>
-                <preferred-size width="250" height="200"/>
-                <maximum-size width="500" height="200"/>
+                <preferred-size width="250" height="275"/>
+                <maximum-size width="500" height="-1"/>
               </grid>
             </constraints>
             <properties>
